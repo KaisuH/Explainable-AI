@@ -379,7 +379,7 @@ node [shape=record];
 138735031598832 -> 138735062370928 [penwidth=2, color="#8ECAE6"];
 138735062370928 -> 138735029749184 [penwidth=2, color="#8ECAE6"];
 138735029749184 -> 138735029748320 [penwidth=2, color="#8ECAE6"];
-graph [splines=polyline, outputorder=edgesfirst, concentrate=false, ranksep=0.25, nodesep=0.15, pad=0.2, margin=0.2, ratio=compress, size="30,16"];
+graph [splines=polyline, outputorder=edgesfirst, concentrate=false, ranksep=0.25, nodesep=0.15, pad=0.2, margin=0.2];
 node [fontsize=8, margin=0.02, penwidth=1];
 edge [arrowsize=0.4, penwidth=1.1, color="#8ECAE6"];
 }
