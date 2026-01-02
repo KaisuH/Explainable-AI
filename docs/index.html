@@ -7928,7 +7928,7 @@ ReLU keeps only positive evidence, i.e. features that increase the class score, 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="Part-2.-Hard-way">Part 2. Hard way<a class="anchor-link" href="#Part-2.-Hard-way">¶</a></h1><p>Deep learning has proven to be as good and even better than humans in detecting diseases from X-rays, MRI scans and CT scans. It would be interesting to see how the network detects the brain tumors.</p>
-<p>Next I will implement my own Grad-CAM pipeline in python. I will apply it on a classifier model I developed. This model that takes MRI images of the brain as input and classifies them into two classes: contains a brain tumor (1) or not (0). You can check the original project here: <a href="https://kaisuh.github.io/brain-tumor-detector/">Brain tumor detector</a>.</p>
+<p>Next I will implement my own Grad-CAM pipeline in python. I will apply it on a classifier model I developed. The model takes brain MRI images as input and classifies them into two classes: contains a brain tumor (1) or not (0). You can check the original project here: <a href="https://kaisuh.github.io/brain-tumor-detector/">Brain tumor detector</a>.</p>
 </div>
 </div>
 </div>
@@ -7969,10 +7969,12 @@ The final pipeline has a two step process where</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Convolutional-neural-networks-(CNNs)">Convolutional neural networks (CNNs)<a class="anchor-link" href="#Convolutional-neural-networks-(CNNs)">¶</a></h3><ul>
+<h3 id="Theory-behind-the-model">Theory behind the model<a class="anchor-link" href="#Theory-behind-the-model">¶</a></h3><p>The ResNet architecture involves convolutional neural network layers and "skip connections". You can see the full architecture of the brain tumor detector model at <a href="#representation-of-different-layers-and-their-attention-maps">
+“Representation of different layers and their attention maps”</a>.</p>
+<h4 id="Convolutional-neural-networks-(CNNs)">Convolutional neural networks (CNNs)<a class="anchor-link" href="#Convolutional-neural-networks-(CNNs)">¶</a></h4><ul>
 <li>The first CNN layers are used to extract high level general features</li>
 <li>The last couple of layers will perform classification</li>
-<li>Locla respective fields scan the image first searching for simple shapes such as edges and lines</li>
+<li>Local respective fields scan the image first searching for simple shapes such as edges and lines</li>
 <li>The edges are picked up by the subsequent layer to form more complex features</li>
 </ul>
 <p>A good visualisation of the feature extraction with convolutions can be found at <a href="https://setosa.io/ev/image-kernels/">https://setosa.io/ev/image-kernels/</a></p>
@@ -7985,7 +7987,7 @@ The final pipeline has a two step process where</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="ResNet-(Residual-Network)">ResNet (Residual Network)<a class="anchor-link" href="#ResNet-(Residual-Network)">¶</a></h3><ul>
+<h4 id="ResNet-(Residual-Network)">ResNet (Residual Network)<a class="anchor-link" href="#ResNet-(Residual-Network)">¶</a></h4><ul>
 <li>As CNNs grow deeper, vanishing gradients negatively imapct the network performance. Vanishing gradient occurs when the gradient is backpropagated to earlier layers which results in a very small gradient.</li>
 <li>ResNets "skip connection" feature can allow training of 152 layers wihtout vanishing gradient problems</li>
 <li>ResNet adds "identity mapping on top of the CNN</li>
@@ -8007,44 +8009,9 @@ The final pipeline has a two step process where</p>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_hide_input">
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_hide_input">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_hide_input">
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Found 2839 validated image filenames belonging to 2 classes.
-Found 500 validated image filenames belonging to 2 classes.
-Found 590 validated image filenames belonging to 2 classes.
-</pre>
-</div>
-</div>
-</div>
-</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_hide_input">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell celltag_hide_input">
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/usr/local/lib/python3.12/dist-packages/keras/src/trainers/data_adapters/py_dataset_adapter.py:121: UserWarning:
-
-Your `PyDataset` class should call `super().__init__(**kwargs)` in its constructor. `**kwargs` can include `workers`, `use_multiprocessing`, `max_queue_size`. Do not pass these arguments to `fit()`, as they will be ignored.
-
-</pre>
-</div>
-</div>
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre><span class="ansi-bold">37/37</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">183s</span> 5s/step
-</pre>
-</div>
-</div>
-</div>
-</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_hide_input">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs celltag_hide_input">
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper" tabindex="0">
